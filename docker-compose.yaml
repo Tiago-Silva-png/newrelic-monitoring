@@ -1,0 +1,40 @@
+version: '3'
+
+networks: 
+  newrelic-monitoring:
+    external: true
+
+services:
+  newrelic-infrastructure-monitoring:
+    container_name: newrelic-infrastructure-monitoring
+    build:
+      context: .
+      dockerfile: newrelic-infra.dockerfile
+    cap_add:
+      - SYS_PTRACE
+    pid: host
+    # cgroupns: host
+    # network_mode: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./config:/etc/newrelic-infra/integrations.d"
+      - "./logs:/var/log/nginx/"
+      # - "./conf:/home"
+    restart: unless-stopped
+    networks:
+      - newrelic-monitoring
+
+  #  build:
+  #     context: .
+  #     dockerfile: newrelic-infra.dockerfile
+  #   cap_add:
+  #     - SYS_PTRACE
+  #   network_mode: host
+  #   pid: host
+  #   privileged: true
+  #   volumes:
+  #     - "/:/host:ro"
+  #     - "/var/run/docker.sock:/var/run/docker.sock"
+  #   restart: unless-stopped
