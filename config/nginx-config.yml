@@ -1,0 +1,49 @@
+integrations:
+  - name: nri-nginx
+    env:
+      METRICS: "true"
+      INVENTORY: "true"
+      # STATUS_URL: http://nginx-compesa-metropolitana/basic_status
+      # STATUS_URL: http://conector-kafka-externo_nginx_1/basic_status
+      STATUS_URL: http://nginx-rn-monitoring/basic_status
+      STATUS_MODULE: discover
+      # CONFIG_PATH: /etc/nginx/nginx.conf
+      CONFIG_PATH: /dev/null
+      REMOTE_MONITORING: true
+    interval: 30s
+    labels:
+      env: production
+      role: load_balancer
+    inventory_source: config/nginx
+
+  # - name: nri-nginx
+  #   env:
+  #     METRICS: "true"
+  #     INVENTORY: "true"
+  #     # STATUS_URL: http://nginx-compesa-interior/basic_status
+  #     STATUS_URL: http://nginx-compesa-interior/basic_status
+  #     STATUS_MODULE: discover
+  #     # CONFIG_PATH: /etc/nginx/nginx.conf
+  #     CONFIG_PATH: /dev/null
+  #     REMOTE_MONITORING: true
+  #   interval: 30s
+  #   labels:
+  #     env: production
+  #     role: load_balancer
+  #   inventory_source: config/nginx
+
+  # - name: nri-nginx
+  #   env:
+  #     METRICS: "true"
+  #     INVENTORY: "true"
+  #     # STATUS_URL: http://nginx-dmae/basic_status
+  #     STATUS_URL: http://nginx-dmae/basic_status
+  #     STATUS_MODULE: discover
+  #     # CONFIG_PATH: /etc/nginx/nginx.conf
+  #     CONFIG_PATH: /dev/null
+  #     REMOTE_MONITORING: true
+  #   interval: 30s
+  #   labels:
+  #     env: production
+  #     role: load_balancer
+  #   inventory_source: config/nginx
